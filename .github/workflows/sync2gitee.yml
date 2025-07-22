@@ -1,0 +1,26 @@
+name: sync2gitee
+
+on:
+  push:
+  schedule:
+    # 每周一 01:00 UTC 同步
+    # - cron: "0 1 * * 1"
+    # 每天 01:00 UTC 同步
+    - cron: "0 1 * * *"
+
+jobs:
+  run:
+    name: Sync GitHub to Gitee
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mirror the GitHub repos to Gitee
+        uses: Yikun/hub-mirror-action@v1.2
+        with:
+          src: github/astral-sh
+          dst: gitee/xuguangnian
+          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+          dst_token: ${{ secrets.GITEE_TOKEN }}
+          static_list: "uv-pre-commit,ruff-pre-commit"
+          account_type: user
+          force_update: true
+          timeout: 300
