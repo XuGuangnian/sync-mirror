@@ -9,6 +9,7 @@ on:
     # - cron: "0 1 * * *"
     # 每小时同步
     - cron: "0 * * * *"
+  workflow_dispatch: {}
 
 jobs:
   run:
@@ -16,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Mirror the GitHub repos to Gitee
-        uses: Yikun/hub-mirror-action@v1.2
+        uses: Yikun/hub-mirror-action@master
         with:
           src: github/astral-sh
           dst: gitee/xuguangnian
