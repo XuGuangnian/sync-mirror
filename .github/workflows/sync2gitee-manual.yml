@@ -1,0 +1,27 @@
+name: sync2gitee
+
+on:
+  # 可以在 GitHub 的 Action 页面手动触发工作流
+  workflow_dispatch:
+    inputs:
+      repo_name:
+        description: "仓库名称"
+        required: true
+        default: "cloud-native-apps"
+
+jobs:
+  run:
+    name: Sync GitHub to Gitee
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mirror the GitHub repos to Gitee
+        uses: Yikun/hub-mirror-action@v1.2
+        with:
+          src: github/astral-sh
+          dst: gitee/xuguangnian
+          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+          dst_token: ${{ secrets.GITEE_TOKEN }}
+          static_list: "uv-pre-commit,ruff-pre-commit"
+          account_type: user
+          force_update: true
+          timeout: 300
