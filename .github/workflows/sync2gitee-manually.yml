@@ -1,4 +1,4 @@
-name: sync2gitee
+name: sync2gitee-manually
 
 on:
   # 可以在 GitHub 的 Action 页面手动触发工作流
